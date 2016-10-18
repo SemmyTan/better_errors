@@ -101,6 +101,9 @@ module BetterErrors
 
       status_code = 500
       if defined? ActionDispatch::ExceptionWrapper
+        if exception.nil?
+          exception = StandardError.new("Placeholder to get better_errors working with Rails 5.0")
+        end
         status_code = ActionDispatch::ExceptionWrapper.new(env, exception).status_code
       end
 
